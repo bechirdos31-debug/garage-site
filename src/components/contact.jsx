@@ -5,7 +5,7 @@ return(
 <>
 <footer>
 
-<div className="container block6" id="contact">
+<div className="block6" id="contact">
     <div className="loggo"><img src="LOGO.png" alt="" />
        <p>garage automoblie spécialiste en entretien, <br /> degnostic et réparation toutes marques.</p>
 
