@@ -1,9 +1,8 @@
-import { Link } from "react-router-dom"
-
-function Rendez(){
+function Roundez(){
     return(
         <>
-       <section className="block4 "id="rendez" >
+        
+        <section className="block4 "id="rendez" >
        <div className="fil">
            <h3>Prenez rendez-vous</h3>
            <label htmlFor="">Nom</label>
@@ -25,8 +24,9 @@ function Rendez(){
            <input type="date" />
            <label htmlFor="">Heure</label>
            <input type="time" />
+           <button>prise un rendez-vous</button>
            
-<button>prise un rendez-vous</button>
+
 
 
 
@@ -43,15 +43,7 @@ function Rendez(){
        </section>
         
         
-        
-        
-        
-        
-        
-        
-        
-        
         </>
     )
 }
-export default Rendez
+export default Roundez

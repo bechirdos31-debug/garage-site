@@ -1,10 +1,17 @@
+import {Link} from'react-router-dom'
+
 function Navbar(){
+  
+ 
+  
     return(
-        <> <header class="block1">
+      
+      
+        <> <header className="block1">
           <div className="scroll"></div>
-        <nav class="nav">
+        <nav className="nav">
           
-          <div class="logo">
+          <div className="logo">
             <img src="LOGO.png" alt="" width="200px" />
           </div>
           
@@ -25,19 +32,26 @@ function Navbar(){
     <source src="/garage.mp4" type="video/mp4" />
   </video>
 </div>
-          <div class="c">
-            <div class="p">
+          <div className='c'>
+            <div className='p'>
               <h1>GARAGE EXPRESS</h1>
               <p>Entretien, réparation et diagnostic de tous types de véhicules <br /> Qualité,rapidité et fiabilité</p>
             </div>
             
-            <button >Prise de rendez-vous</button>
+
+<Link to="/Roundez" ><button>
+  Prendre un rendez-vous</button>
+</Link>
+            
+            
           </div>
+        
       </header>
+      
         
         
         
         </>
-    )
+             )
 }
 export default Navbar
