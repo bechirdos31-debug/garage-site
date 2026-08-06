@@ -40,7 +40,7 @@ function Navbar(){
             
 
 <Link to="/Roundez" ><button>
-  Prendre un rendez-vous</button>
+  Pren</button>
 </Link>
             
             
