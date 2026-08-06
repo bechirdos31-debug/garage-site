@@ -39,7 +39,7 @@ function Navbar(){
             </div>
             
 
-<Link to="/Roundez" ><button>
+<Link to="/roundez" ><button>
   Pren</button>
 </Link>
             
