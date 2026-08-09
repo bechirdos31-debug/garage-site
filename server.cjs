@@ -11,7 +11,7 @@ app.use(express.json());
 // 1. الربط بقاعدة البيانات (MongoDB)
 mongoose
   .connect(
-    "mongodb://garage:garage1234567@ac-dz9ub8o-shard-00-00.pkqkqcy.mongodb.net:27017,ac-dz9ub8o-shard-00-01.pkqkqcy.mongodb.net:27017,ac-dz9ub8o-shard-00-02.pkqkqcy.mongodb.net:27017/?ssl=true&replicaSet=atlas-yizuoe-shard-0&authSource=admin&appName=Cluster0"
+    process.evn.MONGODB_URI
   )
   .then(() => console.log("MongoDB connected successfully!"))
   .catch((err) => console.log("MongoDB connection error:", err));
