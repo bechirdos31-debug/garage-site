@@ -5,6 +5,7 @@ import Propos from './components/propos';
 import Rendez from './components/rendez-vous'; 
 import Contact from './components/contact';
 import Roundez from './components/roundez';
+import Login from './components/login';
 
 import { Routes, Route } from "react-router-dom";
 
@@ -21,12 +22,14 @@ function App() {
             <Propos />
             <Rendez />
             <Contact />
+            
           </>
         }
       />
 
       
       <Route path="/roundez" element={<Roundez />} />
+      <Route path="/admin" element={<Login />} />
     </Routes>
   );
 }
