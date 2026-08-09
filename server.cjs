@@ -10,9 +10,7 @@ app.use(express.json());
 
 // 1. الربط بقاعدة البيانات (MongoDB)
 mongoose
-  .connect(
-    process.evn.MONGODB_URI
-  )
+  .connect(process.evn.MONGODB_URI)
   .then(() => console.log("MongoDB connected successfully!"))
   .catch((err) => console.log("MongoDB connection error:", err));
 
@@ -57,7 +55,9 @@ app.get("/api/roundez", async (req, res) => {
     res.json(liste);
   } catch (error) {
     console.error("Error fetching data:", error);
-    res.status(500).json({ message: "Erreur serveur lors de la récupération." });
+    res
+      .status(500)
+      .json({ message: "Erreur serveur lors de la récupération." });
   }
 });
 
