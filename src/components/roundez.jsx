@@ -12,7 +12,7 @@ function Roundez(){
         e.preventDefault(); // يمنع إعادة تحميل الصفحة
       
         try {
-          const response = await fetch('http://localhost:5174//api/roundez', {
+          const response = await fetch('https://true-taxes-cough.loca.lt/api/roundez', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
