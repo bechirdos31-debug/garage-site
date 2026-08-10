@@ -7,7 +7,7 @@ function AdminDashboard() {
   // دالة جلب المواعيد من الـ Backend
   const fetchRendezVous = async () => {
     try {
-      const response = await fetch("https://garage-site-6.onrender/api/roundez");
+      const response = await fetch("https://garage-site-6.onrender.com/api/roundez");
       const data = await response.json();
       setListeRendezVous(data);
       setLoading(false);
