@@ -50,6 +50,42 @@ app.post("/api/roundez", async (req, res) => {
 });
 
 // 4. Route جلب المواعيد للـ Admin (GET)
+app.get("/api/rendez-vous", async (req, res) => {
+  try {
+    const liste = await RendezVous.find().sort({ createdAt: -1 });
+    res.json(liste);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res
+      .status(500)
+      .json({ message: "Erreur serveur lors de la récupération." });
+  }
+});
+
+// 5. تشغيل السيرفر
+app.listen(5001, () => {
+  console.log("Server is running on port 5001");
+});
+app.post("/api/rendez-vous", async (req, res) => {
+  try {
+    console.log("=== NEW REQUEST RECEIVED ===");
+    console.log("Data:", req.body);
+
+    const nouveauRendezVous = new RendezVous(req.body);
+    await nouveauRendezVous.save();
+
+    console.log("Saved to database successfully!");
+
+    res.json({
+      message: "Rendez-vous enregistré avec succès dans la base de données !",
+    });
+  } catch (error) {
+    console.error("Error saving to database:", error);
+    res.status(500).json({ message: "Erreur lors de l'enregistrement." });
+  }
+});
+
+// 4. Route جلب المواعيد للـ Admin (GET)
 app.get("/api/roundez", async (req, res) => {
   try {
     const liste = await RendezVous.find().sort({ createdAt: -1 });
@@ -66,4 +102,4 @@ app.get("/api/roundez", async (req, res) => {
 app.listen(5001, () => {
   console.log("Server is running on port 5001");
 });
-module.exports =app;
+module.exports = app;
