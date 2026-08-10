@@ -48,7 +48,7 @@ function Roundez(){
            <label htmlFor="">Tel</label>
            <input type="tel" value={telephone} onChange={(e)=> setTelephone(e.target.value)}  />
            <label htmlFor="">Service souhaité</label>
-           <select name="services" id="services" value={services} onChange={(e)=> setServices(e.target.value)} ><option value="Diagnostic">Diagnostic</option><option value="1">Vidange</option> 
+           <select name="services" id="services" value={services} onChange={(e)=> setServices(e.target.value)} ><option value="">services</option><option value="Diagnostic">Diagnostic</option><option value="vidange">Vidange</option> 
            <option value="freinage">Freinage</option>
            <option value="climatisation">Climatisation</option>
            <option value="pneus">Pneus</option>
