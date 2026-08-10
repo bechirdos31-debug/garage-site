@@ -11,7 +11,7 @@ function Roundez(){
         e.preventDefault();
         console.log("button cliked")
         try{
-            const reponse = await fetch("http://localhost:5001/api/roundez",{method:"POST", headers:{"Content-Type":"application/json"},
+            const reponse = await fetch("/api/roundez",{method:"POST", headers:{"Content-Type":"application/json"},
         body:JSON.stringify({
             nom,pre,telephone,services,date,heure,
         }),
