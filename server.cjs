@@ -10,7 +10,7 @@ app.use(express.json());
 
 // 1. الربط بقاعدة البيانات (MongoDB)
 mongoose
-  .connect(process.evn.MONGODB_URI)
+  .connect(process.env.MONGODB_URI)
   .then(() => console.log("MongoDB connected successfully!"))
   .catch((err) => console.log("MongoDB connection error:", err));
 

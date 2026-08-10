@@ -8,29 +8,33 @@ function Roundez(){
     const[services,setServices]=useState("");
 
     const[telephone,setTelephone]=useState("");
-    const handleSubmit = async (e) => {
-        e.preventDefault(); // يمنع إعادة تحميل الصفحة
-      
-        try {
-          const response = await fetch('https://true-taxes-cough.loca.lt/api/roundez', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(nom,pre,telephone,services,date,heure), // تحويل البيانات إلى JSON
-          });
-      
-          if (response.ok) {
-            const data = await response.json();
-            console.log('تم الإرسال بنجاح:', data);
-            alert('تم إرسال الطلب بنجاح!');
-          } else {
-            console.error('حدث خطأ في السيرفر:', response.status);
-          }
-        } catch (error) {
-          console.error('فشل الاتصال بالسيرفر:', error);
-        }
-      };
+    const handleSubmit=async(e)=>{
+        e.preventDefault();
+        console.log("button cliked")
+        try{
+            const reponse = await fetch("http://localhost:5000/api/roundez",{method:"POST", headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+            nom,pre,telephone,services,date,heure,
+        }),
+    
+    
+    
+    
+    });
+    const data = await reponse.json();
+    alert(data.message);
+    setNom("");
+    setPre("");
+    setTelephone("");
+    setServices("");
+    setDate("");
+    setHeure("");
+
+        }catch( error){ console.log(error);
+           
+    
+    }
+    };
     return(
         <>
         
