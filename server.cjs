@@ -1,68 +1,67 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+
 const app = express();
+
+// Middleware
 app.use(cors());
 app.use(express.json());
+
+// 1. الربط بقاعدة البيانات (MongoDB)
 mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(() => {
-    console.log("MongoDB connected successfully!");
-  })
-  .catch((error) => {
-    console.error("MongoDB connection error:", error);
-  });
+  .connect(
+    "mongodb://garage:garage1234567@ac-dz9ub8o-shard-00-00.pkqkqcy.mongodb.net:27017,ac-dz9ub8o-shard-00-01.pkqkqcy.mongodb.net:27017,ac-dz9ub8o-shard-00-02.pkqkqcy.mongodb.net:27017/?ssl=true&replicaSet=atlas-yizuoe-shard-0&authSource=admin&appName=Cluster0"
+  )
+  .then(() => console.log("MongoDB connected successfully!"))
+  .catch((err) => console.log("MongoDB connection error:", err));
+
+// 2. Schema & Model للمواعيد
 const rendezVousSchema = new mongoose.Schema({
-  nom: { type: String, required: true },
-  pre: { type: String, required: true },
-  telephone: { type: String, required: true },
-  services: { type: String, required: true },
-  date: { type: String, required: true },
-  heure: { type: String, required: true },
+  nom: String,
+  pre: String,
+  telephone: String,
+  services: String,
+  date: String,
+  heure: String,
   createdAt: { type: Date, default: Date.now },
 });
-const RendezVous =
-  mongoose.models.RendezVous || mongoose.model("RendezVous", rendezVousSchema);
+
+const RendezVous = mongoose.model("RendezVous", rendezVousSchema);
+
+// 3. Route تسجيل موعد جديد من الحريف (POST)
 app.post("/api/roundez", async (req, res) => {
   try {
-    console.log("=== NEW RENDEZ-VOUS ===");
-    console.log(req.body);
-    const nouveauRendezVous = new RendezVous({
-      nom: req.body.nom,
-      pre: req.body.pre,
-      telephone: req.body.telephone,
-      services: req.body.services,
-      date: req.body.date,
-      heure: req.body.heure,
-    });
+    console.log("=== NEW REQUEST RECEIVED ===");
+    console.log("Data:", req.body);
+
+    const nouveauRendezVous = new RendezVous(req.body);
     await nouveauRendezVous.save();
-    console.log("Rendez-vous saved successfully!");
-    res
-      .status(201)
-      .json({ success: true, message: "Rendez-vous enregistré avec succès !" });
-  } catch (error) {
-    console.error("Error saving rendez-vous:", error);
-    res.status(500).json({
-      success: false,
-      message: "Erreur lors de l'enregistrement du rendez-vous.",
-      error: error.message,
+
+    console.log("Saved to database successfully!");
+
+    res.json({
+      message: "Rendez-vous enregistré avec succès dans la base de données !",
     });
+  } catch (error) {
+    console.error("Error saving to database:", error);
+    res.status(500).json({ message: "Erreur lors de l'enregistrement." });
   }
 });
+
+// 4. Route جلب المواعيد للـ Admin (GET)
 app.get("/api/roundez", async (req, res) => {
   try {
     const liste = await RendezVous.find().sort({ createdAt: -1 });
-    res.status(200).json(liste);
+    res.json(liste);
   } catch (error) {
-    console.error("Error fetching rendez-vous:", error);
-    res.status(500).json({
-      success: false,
-      message: "Erreur lors de la récupération des rendez-vous.",
-      error: error.message,
-    });
+    console.error("Error fetching data:", error);
+    res.status(500).json({ message: "Erreur serveur lors de la récupération." });
   }
 });
-app.get("/api/test", (req, res) => {
-  res.json({ success: true, message: "Server fonctionne correctement !" });
+
+// 5. تشغيل السيرفر
+app.listen(5000, () => {
+  console.log("Server is running on port 5000");
 });
-module.exports = app;
+
