@@ -41,7 +41,7 @@ app.post("/api/roundez", async (req, res) => {
     console.log("Saved to database successfully!");
 
     res.json({
-      message: "Rendez-vous enregistré avec succès dans la base de données !",
+      message: "Rendez-vous enregistré avec succès!",
     });
   } catch (error) {
     console.error("Error saving to database:", error);
@@ -66,4 +66,4 @@ app.get("/api/roundez", async (req, res) => {
 app.listen(5001, () => {
   console.log("Server is running on port 5001");
 });
-module.exports =app;
+module.exports = app;

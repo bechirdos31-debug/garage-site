@@ -451,33 +451,50 @@ button:hover{
   text-align: center;
   margin-bottom: 40px;
 } 
-@media (max-width:768px) {
-  .block4{
-    
-    width: 90%;
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 15px 30px; 
-      
-  }
-  .fil{
-    width: 760px;
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-  .fil input,select{
-    width: 100%;
-    width: 210px;
-    
-    height: 48px;
-    box-sizing: border-box;
-  }
-  .fil button{
-    width: 200px;
-    max-width: 100%;
-  }
+
+@media (max-width: 768px) {
   
+  body, html {
+    overflow-x: hidden;
+  }
+
+  
+  .block4,
+  .fil{
+    width: 100% ;
+    max-width: 100% ;
+    min-width: 100% ;
+    margin-left: 0 ;
+    margin-right: 0 ;
+    padding-left: 10px ;
+    padding-right: 10px ;
+    box-sizing: border-box ;
+  }
+
+  .fil input,
+  .fil select,
+  .fil button {
+    width: 100% ;
+    max-width: 100% ;
+    box-sizing: border-box ;
+    display: block ;
+  margin-bottom: 15px;
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .loggo img{
   width: 170px;
 } 
@@ -503,5 +520,91 @@ button:hover{
   
 
 }
-    
+@media (max-width:768px) {
+  .block6{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+  
+  }
+  
+}
+   /* الخلفية التي تغطي كامل الشاشة */
+.custom-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* المربع الأبيض في المنتصف */
+.custom-modal-box {
+  background: #ffffff;
+  padding: 30px 25px;
+  border-radius: 16px;
+  text-align: center;
+  width: 85%;
+  max-width: 380px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  animation: popupFade 0.3s ease-out;
+}
+
+/* أيقونة النجاح */
+.success-icon {
+  width: 60px;
+  height: 60px;
+  background-color: #d4edda;
+  color: #28a745;
+  font-size: 30px;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 15px auto;
+}
+
+.custom-modal-box h3 {
+  margin: 0 0 10px 0;
+  color: #155724;
+  font-size: 20px;
+}
+
+.custom-modal-box p {
+  color: #6c757d;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* زر إغلاق النافذة */
+.custom-modal-box button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: bold;
+}
+
+/* حركة ظهور متدرجة للنافذة */
+@keyframes popupFade {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+} 
     

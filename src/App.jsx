@@ -2,7 +2,7 @@ import './App.css';
 import Navbar from './components/navbar';
 import Services from './components/services';
 import Propos from './components/propos';
-import Rendez from './components/rendez-vous'; 
+
 import Contact from './components/contact';
 import Roundez from './components/roundez';
 import Login from './components/login';
@@ -20,7 +20,7 @@ function App() {
             <Navbar />
             <Services />
             <Propos />
-            <Rendez />
+            <Roundez />
             <Contact />
             
           </>

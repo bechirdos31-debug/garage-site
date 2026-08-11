@@ -7,6 +7,8 @@ function Roundez(){
     const[services,setServices]=useState("");
 
     const[telephone,setTelephone]=useState("");
+    const[model,setModel]=useState("");
+    const[messsage,setMesssage]=useState("");
     const handleSubmit=async(e)=>{
         e.preventDefault();
         console.log("button cliked")
@@ -21,7 +23,8 @@ function Roundez(){
     
     });
     const data = await reponse.json();
-    alert(data.message);
+    setMesssage(data.message||"rendez-vous enregistré avec succés");
+    setModel(true)
     setNom("");
     setPre("");
     setTelephone("");
@@ -30,6 +33,8 @@ function Roundez(){
     setHeure("");
 
         }catch( error){ console.log(error);
+            setMesssage("une errure est survenue");
+            setModel(true);
            
     
     }
@@ -77,6 +82,13 @@ function Roundez(){
 
 
        </section>
+   {model &&(   <div className="custom-modal-overlay">
+           <div className="custom-modal-box"><div className="success-icon">✓</div>
+           <h3>confirmation</h3>
+           <p>{messsage}</p>
+           <button onClick={()=> setModel(false)}>ok</button></div>
+       </div>)}
+
         
         
         </>
