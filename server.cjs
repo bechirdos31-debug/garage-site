@@ -61,6 +61,7 @@ app.get("/api/roundez", async (req, res) => {
       .json({ message: "Erreur serveur lors de la récupération." });
   }
 });
+app.delete("/api/roundez/:id", async (req, res) => { try { await RendezVous.findByIdAndDelete(req.params.id); res.json({ message: "Rendez-vous supprimé" }); } catch (error) { console.error(error); res.status(500).json({ message: "Erreur serveur" }); } });
 
 // 5. تشغيل السيرفر
 app.listen(5001, () => {

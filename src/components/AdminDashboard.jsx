@@ -1,77 +1,180 @@
 import { useState, useEffect } from "react";
 
 function AdminDashboard() {
-  const [listeRendezVous, setListeRendezVous] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [appointments, setAppointments] = useState([]);
 
-  // دالة جلب المواعيد من الـ Backend
-  const fetchRendezVous = async () => {
+  const API_URL =
+    "https://garage-site-6.onrender.com/api/roundez";
+
+  const fetchAppointments = async () => {
     try {
-      const response = await fetch("https://garage-site-6.onrender.com/api/roundez");
+      const response = await fetch(API_URL);
+
+      if (!response.ok) {
+        throw new Error("Erreur serveur");
+      }
+
       const data = await response.json();
-      setListeRendezVous(data);
-      setLoading(false);
+
+      setAppointments(data);
     } catch (error) {
-      console.error("Erreur:", error);
-      setLoading(false);
+      console.error(
+        "Erreur de chargement:",
+        error
+      );
     }
   };
 
   useEffect(() => {
-    fetchRendezVous();
+    fetchAppointments();
   }, []);
 
-  return (
-    <div style={{ padding: "30px", maxWidth: "1000px", margin: "0 auto", fontFamily: "sans-serif" }}>
-      <h2 style={{ color: "#333", borderBottom: "2px solid #007bff", paddingBottom: "10px" }}>
-        Espace Admin - Liste des Rendez-vous
-      </h2>
+  const handleDelete = async (id) => {
+    const confirmation = window.confirm(
+      "Voulez-vous vraiment supprimer ce rendez-vous ?"
+    );
 
-      <button 
-        onClick={fetchRendezVous} 
-        style={{ 
-          padding: "10px 18px", 
-          marginBottom: "20px", 
-          backgroundColor: "#007bff", 
-          color: "white", 
-          border: "none", 
-          borderRadius: "5px",
-          cursor: "pointer" 
-        }}
+    if (!confirmation) {
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        API_URL + "/" + id,
+        {
+          method: "DELETE",
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.message ||
+          "Erreur de suppression"
+        );
+      }
+
+      setAppointments((prev) =>
+        prev.filter(
+          (item) => item._id !== id
+        )
+      );
+
+    } catch (error) {
+      console.error(
+        "Erreur de suppression:",
+        error
+      );
+
+      alert(
+        "Erreur : " + error.message
+      );
+    }
+  };
+
+  return (
+    <div className="admin-page">
+
+      <h1>
+        Admin Dashboard
+      </h1>
+
+      <button
+        onClick={fetchAppointments}
       >
-        Rafraîchir (تحديث القائمة)
+        Rafraîchir
       </button>
 
-      {loading ? (
-        <p>Chargement des données...</p>
-      ) : listeRendezVous.length === 0 ? (
-        <p>Aucun rendez-vous trouvé.</p>
-      ) : (
-        <table border="1" cellPadding="12" style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
+      <div className="table-responsive">
+
+        <table>
+
           <thead>
-            <tr style={{ backgroundColor: "#f8f9fa" }}>
+
+            <tr>
               <th>Nom</th>
               <th>Prénom</th>
               <th>Téléphone</th>
               <th>Service</th>
               <th>Date</th>
               <th>Heure</th>
+              <th>Action</th>
             </tr>
+
           </thead>
+
           <tbody>
-            {listeRendezVous.map((rv) => (
-              <tr key={rv._id}>
-                <td>{rv.nom}</td>
-                <td>{rv.pre}</td>
-                <td>{rv.telephone}</td>
-                <td>{rv.services}</td>
-                <td>{rv.date}</td>
-                <td>{rv.heure}</td>
+
+            {appointments.length > 0 ? (
+
+              appointments.map((item) => (
+
+                <tr key={item._id}>
+
+                  <td>
+                    {item.nom || "-"}
+                  </td>
+
+                  <td>
+                    {item.pre ||
+                      item.prenom ||
+                      "-"}
+                  </td>
+
+                  <td>
+                    {item.telephone || "-"}
+                  </td>
+
+                  <td>
+                    {item.services || "-"}
+                  </td>
+
+                  <td>
+                    {item.date || "-"}
+                  </td>
+
+                  <td>
+                    {item.heure || "-"}
+                  </td>
+
+                  <td>
+
+                    <button
+                      className="btn-delete"
+                      onClick={() =>
+                        handleDelete(
+                          item._id
+                        )
+                      }
+                    >
+                      Supprimer
+                    </button>
+
+                  </td>
+
+                </tr>
+
+              ))
+
+            ) : (
+
+              <tr>
+
+                <td colSpan="7">
+                  Aucun rendez-vous trouvé
+                </td>
+
               </tr>
-            ))}
+
+            )}
+
           </tbody>
+
         </table>
-      )}
+
+      </div>
+
     </div>
   );
 }
