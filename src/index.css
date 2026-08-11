@@ -620,6 +620,7 @@ button:hover{
     transform: scale(1);
   }
 } 
+
 .admin-page {
   min-height: 100vh;
   padding: 30px;
@@ -760,9 +761,7 @@ td {
   border-top: 1px solid #1b2635;
 }
 
-tbody tr:hover {
-  background: #121c29;
-}
+
 
 .client {
   display: flex;
