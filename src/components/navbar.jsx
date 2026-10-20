@@ -1,6 +1,21 @@
 import {Link} from'react-router-dom'
+import { useState, useEffect } from "react";
 
 function Navbar(){
+  const [scrolled, setScrolled] = useState(false);
+
+useEffect(() => {
+  const handleScroll = () => {
+    setScrolled(window.scrollY > 50);
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  handleScroll();
+
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, []);
   
  
   
@@ -9,7 +24,7 @@ function Navbar(){
       
         <> <header className="block1">
           <div className="scroll"></div>
-        <nav className="nav">
+          <nav className={`nav ${scrolled ? "scrolled" : ""}`}>
           
           <div className="logo">
             <img src="LOGO.png" alt="" width="200px" />
@@ -28,9 +43,7 @@ function Navbar(){
       
         
         <div >
-  <video autoPlay loop muted playsInline  id="bg-video">
-    <source src="/garage.mp4" type="video/mp4" />
-  </video>
+  <img src="garage.jpg" alt="" id='bg' />
 </div>
           <div className='c'>
             <div className='p'>
